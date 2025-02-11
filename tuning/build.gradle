@@ -1,0 +1,48 @@
+plugins {
+    id 'java-library'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+ext {
+    flinkVersion = '1.18.1'
+    log4jVersion = '2.17.1'
+}
+
+
+dependencies {
+    implementation "org.apache.flink:flink-streaming-java:${flinkVersion}"
+    implementation "org.apache.flink:flink-clients:${flinkVersion}"
+    implementation "org.apache.flink:flink-table-common:${flinkVersion}"
+    implementation "org.apache.flink:flink-table-api-java-bridge:${flinkVersion}"
+    implementation "org.apache.flink:flink-runtime-web:${flinkVersion}"
+
+    implementation "org.apache.flink:flink-connector-base:${flinkVersion}"
+    implementation "org.apache.flink:flink-json:${flinkVersion}"
+    implementation "org.apache.flink:flink-avro:${flinkVersion}"
+    implementation "org.apache.flink:flink-avro-confluent-registry:${flinkVersion}"
+    implementation "org.apache.flink:flink-connector-kafka:3.2.0-1.18"
+
+    runtimeOnly "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}"
+    runtimeOnly "org.apache.logging.log4j:log4j-api:${log4jVersion}"
+    runtimeOnly "org.apache.logging.log4j:log4j-core:${log4jVersion}"
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+testing {
+    suites {
+        test {
+            useJUnitJupiter('5.9.1')
+        }
+    }
+}
+
+application {
+    mainClass = 'com.donkey.flink.App'
+}

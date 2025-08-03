@@ -23,7 +23,7 @@ public class FraudDetectorJob {
 
         env.enableCheckpointing(TimeUnit.SECONDS.toMillis(10), CheckpointingMode.EXACTLY_ONCE);
         CheckpointConfig ck = env.getCheckpointConfig();
-        ck.setCheckpointStorage("C:\\Users\\donkey\\Documents\\Github\\donkey\\checkpoint\\FraudDetector");
+        ck.setCheckpointStorage("file://C:\\Users\\donkey\\Documents\\Github\\donkey\\checkpoint\\FraudDetector");
         ck.setMinPauseBetweenCheckpoints(TimeUnit.SECONDS.toMillis(10));
         ck.setCheckpointTimeout(TimeUnit.SECONDS.toMillis(10));
         ck.setMaxConcurrentCheckpoints(1);
